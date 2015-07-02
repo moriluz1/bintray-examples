@@ -14,35 +14,32 @@
  * limitations under the License.
  */
  
-import java.text.SimpleDateFormat
+
 
 buildscript {
-  repositories {
-    jcenter()
-  }
+	repositories {
+		jcenter()
+	}
+  
+	dependencies {
+		classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2"
+	} 
 }
 
-plugins {
-    id "com.jfrog.bintray" version "1.2"
-}
+group = 'org.jfrog.example.gradle'
+version = '1.0'
+
+apply plugin: 'com.jfrog.bintray'
 
 allprojects {
 	repositories {
 		jcenter()
 	}
 	apply plugin: 'maven'
-	configure(subprojects.findAll { new File(it.projectDir, 'src').directory }) {
-		apply plugin: 'java'
-	}	
-	group = 'org.jfrog.example.gradle'
-	version = '1.0'
-	status = 'Integration'
+	apply plugin: 'java'	
 }
 
 subprojects {
-	manifest {
-		attributes 'provider': 'gradle'
-	}
 	configurations {
 		published
 	}
@@ -51,36 +48,31 @@ subprojects {
 	}
 }
 
-allprojects {
-	bintray {
-		user = System.getenv('BINTRAY_USER')
-		key = System.getenv('BINTRAY_KEY')
-
-		filesSpec {
-			from 'build/libs'
-			into 'standalone_files'         
-		}
-		dryRun = false //Whether to run this as dry-run, without deploying
-		publish = true //If version should be auto published after an upload
-		pkg {
-			repo = 'maven'
-			name = 'gradle-filespec-test'
-			desc = 'what a fantastic package indeed!'
-			licenses = ['Apache-2.0']
-			vcsUrl = 'https://github.com/bintray/gradle-bintray-plugin.git'
-			labels = ['gear', 'gore', 'gorilla']
-			publicDownloadNumbers = true
-			attributes= ['a': ['ay1', 'ay2'], 'b': ['bee'], c: 'cee'] //Optional package-level attributes
-			version {
-				name = '1.0-Final'
-				desc = 'Gradle Bintray Plugin 1.0 final'
-				vcsTag = '1.3.0'
-				attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
-			}
+bintray {
+	user = System.getenv('BINTRAY_USER')
+	key = System.getenv('BINTRAY_KEY')
+	filesSpec {
+		from 'build/libs'
+		into '/'         
+	}
+	pkg {
+		repo = 'maven'
+		name = 'gradle-filespec-test'
+		desc = 'what a fantastic package indeed!'
+		licenses = ['Apache-2.0']
+		vcsUrl = 'https://github.com/bintray/gradle-bintray-plugin.git'
+		labels = ['gear', 'gore', 'gorilla']
+		publicDownloadNumbers = true
+		attributes= ['a': ['ay1', 'ay2'], 'b': ['bee'], c: 'cee'] //Optional package-level attributes
+		version {
+			name = '1.0-Final'
+			desc = 'Gradle Bintray Plugin 1.0 final'
+			vcsTag = '1.3.0'
+			attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
 		}
 	}
 }
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '2.0'
+  gradleVersion = '2.4'
 }

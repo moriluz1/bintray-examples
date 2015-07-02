@@ -2,29 +2,25 @@ buildscript {
 	repositories {
 		jcenter()
 	}
+	dependencies {
+		classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2"
+	}
 }
 
-plugins {
-    id "com.jfrog.bintray" version "1.2"
-}
+apply plugin: 'com.jfrog.bintray'
+
+group = 'org.jfrog.example.gradle'
+version = '1.0'
 
 allprojects {
 	repositories {
 		jcenter()
 	}
 	apply plugin: 'maven'
-	apply plugin: 'java'
-
-	group = 'org.jfrog.example.gradle'
-	version = '1.0'
-	status = 'integration'
-  
+	apply plugin: 'java' 
 }
 
 subprojects {
-	manifest {
-		attributes 'provider': 'gradle'
-	}
 	dependencies {
 		testCompile 'junit:junit:4.7'
 	}

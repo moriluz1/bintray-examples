@@ -8,15 +8,14 @@ plugins {
     id "com.jfrog.bintray" version "1.2"
 }
 
+group = 'org.jfrog.example.gradle'
+version = '2.1'
+
 allprojects {
 	repositories {
 		jcenter()
 	}
 	apply plugin: 'java'
-  
-	group = 'org.jfrog.example.gradle'
-	version = '2.1'
-	status = 'integration'
 }
 
 bintray {	
