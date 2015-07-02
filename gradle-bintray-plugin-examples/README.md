@@ -15,17 +15,17 @@ and the gradle wrapper in Windows
 > gradlew.bat build bintrayUpload
 ```
 
-### gradle-bintray-plugin-configurations-example
+### configurations-example
 Gradle 2.x sample project with one module only that uses the archives Configuration by applying the java plugin.
 It adds the bintray closure with the mandatory bintray configuration parameters as well as pkg and version configuration to upload artifacts into Bintray.
 
-### gradle-bintray-plugin-example-configurations-modules
+### configurations-modules-example
 Gradle 2.x sample project with a few modules that uses the archives Configuration by applying the java plugin.
 It adds the bintray closure with the mandatory bintray configuration parameters as well as pkg and version configuration to upload artifacts into Bintray.
 
-### gradle-bintray-plugin-publications-example
+### publications-example
 Gradle 2.x sample project with one module that adds maven Publications to the grale script.
 It adds the publications defined into the bintray closure with the mandatory bintray configuration parameters as well as pkg and version configuration to upload artifacts into Bintray.
 
-### gradle-bintray-plugin-filesSpec-example
+### filesSpec-example
 Gradle 2.x sample project with a few modules that uploads arbitrary files from a specific folder to bintray using filesSpec.
